@@ -1,100 +1,78 @@
 <template>
   <div class="header">
     <div class="headerData">
-      <div class="minimumInfo marketCapUSD darkBGFont">
+      <div>
         Market Cap:
-        <span class="marketCapUSDValue neutralFont">
-          {{ '$' + global.market_cap_usd.toLocaleString() }}
-        </span>
-        <span class="" :style="percentageColor(global.market_cap_change_24h)">
-          {{ global.market_cap_change_24h + '%' }}
-        </span>
-      </div>
-
-      <div v-if="updateDetail" class="minimalInfo vol24usd darkBGFont">
-        24h Vol:
-        <span class="vol24Value neutralFont">
-          {{ '$' + global.volume_24h_usd.toLocaleString() }}
-        </span>
+        <span>{{ '$' + global.market_cap_usd.toLocaleString() }}</span>
         <span
-          class="vol24changeValue"
+          class
+          :style="percentageColor(global.market_cap_change_24h)"
+          v-html="showPercentage(global.market_cap_change_24h)"
+        ></span>
+      </div>
+
+      <div v-if="updateDetail">
+        24h Vol:
+        <span>{{ '$' + global.volume_24h_usd.toLocaleString() }}</span>
+        <span
           :style="percentageColor(global.volume_24h_change_24h)"
-        >
-          {{ global.volume_24h_change_24h + '%' }}
-        </span>
+          v-html="showPercentage(global.volume_24h_change_24h)"
+        ></span>
       </div>
 
-      <div class="minimumInfo btcDominance darkBGFont">
+      <div>
         BTC Dominance:
-        <span class="btcDominanceValue neutralFont">
-          {{ global.bitcoin_dominance_percentage + '%' }}
-        </span>
+        <span>{{ global.bitcoin_dominance_percentage + '%' }}</span>
       </div>
 
-      <div v-if="updateDetail" class="maximalInfo marketCapATH darkBGFont">
+      <div v-if="updateDetail">
         Market Cap ATH:
-        <span class="marketCapATHValue neutralFont">
-          {{ '$' + global.market_cap_ath_value.toLocaleString() }}
-        </span>
+        <span>{{ '$' + global.market_cap_ath_value.toLocaleString() }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import percentageMixin from "../mixins/precentageMixins.js";
+
 export default {
-  props: ['updateDetail'],
+  props: ["updateDetail"],
   components: {},
   data: function() {
     return {
-      globalURL: 'https://api.coinpaprika.com/v1/global',
-      global: '',
-    }
+      globalURL: "https://api.coinpaprika.com/v1/global",
+      global: ""
+    };
   },
   methods: {
     getGlobalData: function() {
       // fetch general data from coinpaprika
       fetch(this.globalURL)
-        .then((resp) => resp.json())
-        .then((globalMarketData) => this.globalInfo(globalMarketData))
+        .then(resp => resp.json())
+        .then(globalMarketData => this.globalInfo(globalMarketData))
         // throw an error if server issue
-        .catch((error) => errorMessage(error))
+        .catch(error => errorMessage(error));
     },
     globalInfo: function(data) {
-      this.global = data
-      console.log(this.global)
-    },
-    percentageColor: function(percentage) {
-      if (percentage < 0) {
-        return 'color: #f4200b'
-      } else {
-        return 'color: #00ff3b'
-      }
-    },
-    dataR: function(value) {
-      alert(value)
-    },
+      this.global = data;
+      console.log(this.global);
+    }
   },
+  mixins: [percentageMixin],
   created: function() {
-    this.getGlobalData()
+    this.getGlobalData();
   },
   mounted: function() {
-    console.log('yes')
-    console.log(this.updateDetail)
-  },
-}
+    console.log("yes");
+    console.log(this.updateDetail);
+  }
+};
 </script>
 
 <style>
-/* .header {
-  display: flex;
-  /* justify-content: space-between; 
-} */
 .headerData {
   display: flex;
   justify-content: space-evenly;
 }
-/* .header {
-  position: relative;
-} */
 </style>

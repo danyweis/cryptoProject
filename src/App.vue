@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <i class="far fa-dot-circle"></i>
+    <i class="server far fa-dot-circle"></i>
     <head-header :updateDetail="updateDetail"></head-header>
 
     <nav class="switch">
@@ -8,12 +8,7 @@
         <p>Max</p>
         <div class="checkBox">
           <div class="checkContainer">
-            <input
-              type="checkbox"
-              v-on:change="updateCheckBox"
-              name="minMax"
-              id="minMax"
-            />
+            <input type="checkbox" v-on:change="updateCheckBox" name="minMax" id="minMax" />
             <div class="checkSwitch"></div>
           </div>
         </div>
@@ -25,28 +20,28 @@
 </template>
 
 <script>
-import Header from './components/Header.vue'
-import List from './components/List.vue'
+import Header from "./components/Header.vue";
+import List from "./components/List.vue";
 
 export default {
   data: function() {
     return {
-      updateDetail: '',
-    }
+      updateDetail: ""
+    };
   },
   components: {
     headHeader: Header,
-    cryptoList: List,
+    cryptoList: List
   },
   methods: {
     updateCheckBox: function(value) {
-      this.updateDetail = value.target.checked
-    },
+      this.updateDetail = value.target.checked;
+    }
   },
   created: function() {
-    updateCheckBox()
-  },
-}
+    updateCheckBox();
+  }
+};
 </script>
 
 <style>
@@ -55,14 +50,14 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
 .container {
-  font-family: 'Noto Sans TC', sans-serif;
+  font-family: "Noto Sans TC", sans-serif;
   position: relative;
-  color: aliceblue;
+  color: #d3ebff;
   background-image: linear-gradient(45deg, #032d5e, #001d93, #032d5e);
 }
-.far {
+.server {
   font-size: 20px;
   position: absolute;
   top: 2px;
@@ -107,7 +102,7 @@ export default {
 
 #minMax {
   width: 50px;
-  height: 20px;
+  height: 25px;
   opacity: 0;
 }
 
