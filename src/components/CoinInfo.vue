@@ -12,7 +12,17 @@
             <div class="name">
               <h2>{{ coinUrl.name }}</h2>
             </div>
-            <div class="shortName">( {{ coinUrl.symbol.toUpperCase() }} )</div>
+            <div
+              class="shortName"
+            >{{'(' + coinUrl.symbol.toUpperCase() + ') ' + coinUrl.categories[0]}}</div>
+            <div class="algo" v-if="coinUrl.hashing_algorithm">
+              <div class="algorithm">{{ 'Hashing Algorithm: ' + coinUrl.hashing_algorithm }}</div>
+              <div v-if="coinUrl.block_time_in_minutes" class="blockTime">
+                {{
+                ' Block time: ' + coinUrl.block_time_in_minutes + ' min'
+                }}
+              </div>
+            </div>
           </div>
         </div>
         <div class="rightInfo">
@@ -48,6 +58,9 @@
 
       <hr />
       <changes-info :coinUrl="coinUrl"></changes-info>
+      <hr />
+      <activety-info :coinUrl="coinUrl"></activety-info>
+      <div></div>
     </div>
   </div>
 </template>
@@ -55,6 +68,7 @@
 <script>
 import AllTime from "./AllTime.vue";
 import Changes from "./Change.vue";
+import Activety from "./Activety.vue";
 import percentageMixin from "../mixins/precentageMixins.js";
 
 export default {
@@ -64,7 +78,8 @@ export default {
   },
   components: {
     allTime: AllTime,
-    changesInfo: Changes
+    changesInfo: Changes,
+    activetyInfo: Activety
   },
   methods: {
     getCoinData: function() {
@@ -130,6 +145,11 @@ export default {
 .shortName {
   font-size: 1.2em;
 }
+/* .algo {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+} */
 .allTimeInfo,
 .changes {
   width: 90%;
