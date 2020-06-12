@@ -60,7 +60,9 @@
       <changes-info :coinUrl="coinUrl"></changes-info>
       <hr />
       <activety-info :coinUrl="coinUrl"></activety-info>
-      <div></div>
+      <hr />
+      <dev-data-info :coinUrl="coinUrl"></dev-data-info>
+      <hr />
     </div>
   </div>
 </template>
@@ -69,6 +71,7 @@
 import AllTime from "./AllTime.vue";
 import Changes from "./Change.vue";
 import Activety from "./Activety.vue";
+import DevData from "./GithubInfo.vue";
 import percentageMixin from "../mixins/precentageMixins.js";
 
 export default {
@@ -79,7 +82,8 @@ export default {
   components: {
     allTime: AllTime,
     changesInfo: Changes,
-    activetyInfo: Activety
+    activetyInfo: Activety,
+    devDataInfo: DevData
   },
   methods: {
     getCoinData: function() {

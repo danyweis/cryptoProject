@@ -19,12 +19,14 @@
               target="_blank"
               :href="twitter + coinUrl.links.twitter_screen_name"
             >{{" @" + coinUrl.links.twitter_screen_name}}</a>
+            <p>{{ coinUrl.community_data.twitter_followers + " followers" }}</p>
           </div>
         </div>
         <div class="activityInfoBox" v-if="subreddit">
           <div class="subreddit">
             <i class="fab fa-reddit-alien"></i>
             <a target="_blank" :href="subreddit">{{' ' + coinUrl.name }}</a>
+            <p>{{ coinUrl.community_data.reddit_subscribers + " subscribers" }}</p>
           </div>
         </div>
         <div class="activityInfoBox" v-if="coinUrl.links.facebook_username">
