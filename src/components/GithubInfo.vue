@@ -1,6 +1,6 @@
 <template>
   <div class="devBox">
-    <h2 class="devHeader">Developer Information</h2>
+    <h2 class="positionCenter">Developer Information</h2>
     <div class="developmentInfo">
       <div class="dataLeft">
         <div class="dev">
@@ -69,9 +69,7 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.devHeader {
-  text-align: center;
-}
+
 .devBox {
   padding: 20px;
 }

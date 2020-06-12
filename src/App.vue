@@ -15,6 +15,11 @@
         <p>Min</p>
       </div>
     </nav>
+    <h1 class="positionCenter">Coin Info top 100</h1>
+    <div class="powerd">
+      Data provided by
+      <a href="https://www.coingecko.com/" target="_blank">CoinGecko</a>
+    </div>
     <crypto-list :updateDetail="updateDetail"></crypto-list>
   </div>
 </template>
@@ -56,6 +61,9 @@ export default {
   position: relative;
   color: #d3ebff;
   background-image: linear-gradient(45deg, #032d5e, #001d93, #032d5e);
+}
+.positionCenter {
+  text-align: center;
 }
 .server {
   font-size: 20px;
@@ -137,5 +145,17 @@ export default {
   transform: translateX(-29px);
   -webkit-transition: linear 150ms;
   transition: linear 150ms;
+}
+.powerd {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #7fd6ff;
+  margin: 20px;
+}
+.powerd > a {
+  margin-left: 5px;
+  color: #70bde0;
 }
 </style>

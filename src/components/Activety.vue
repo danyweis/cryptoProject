@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="presenceWeb">Presence on the web</h2>
+    <h2 class="positionCenter presenceWeb">Presence on the web</h2>
     <div class="activity">
       <div class="activityInfoBox github" v-if="coinUrl.links.repos_url.github.length > 0">
         <h3>Github</h3>
@@ -102,7 +102,6 @@ export default {
 }
 .presenceWeb {
   margin: 20px;
-  text-align: center;
 }
 a {
   line-height: 200%;

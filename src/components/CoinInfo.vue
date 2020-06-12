@@ -63,6 +63,8 @@
       <hr />
       <dev-data-info :coinUrl="coinUrl"></dev-data-info>
       <hr />
+      <button class="exchange">Exchange Info</button>
+      <i class="arrow fas fa-sort-down"></i>
     </div>
   </div>
 </template>
@@ -149,11 +151,7 @@ export default {
 .shortName {
   font-size: 1.2em;
 }
-/* .algo {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-} */
+
 .allTimeInfo,
 .changes {
   width: 90%;
@@ -185,5 +183,21 @@ caption {
 }
 th {
   padding: 5px;
+}
+.exchange {
+  padding: 10px;
+  margin: 10px;
+  font-size: 1.4em;
+  background: transparent;
+  border: none;
+  color: #d3ebff;
+  outline: 0;
+}
+.exchange:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.arrow {
+  font-size: 1.4em;
 }
 </style>
