@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <i class="server far fa-dot-circle"></i>
     <head-header :updateDetail="updateDetail"></head-header>
 
     <nav class="switch">
@@ -54,16 +53,23 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scrollbar-color: #43a6f7 #032d5e;
 }
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
 .container {
   font-family: "Noto Sans TC", sans-serif;
   position: relative;
   color: #d3ebff;
+}
+body {
   background-image: linear-gradient(45deg, #032d5e, #001d93, #032d5e);
 }
+
 .positionCenter {
   text-align: center;
+}
+.tableFlow {
+  overflow-x: auto;
 }
 .server {
   font-size: 20px;

@@ -1,4 +1,5 @@
 <template>
+  <!-- all the information about the forks -->
   <div class="devBox">
     <h2 class="positionCenter">Developer Information</h2>
     <div class="developmentInfo">

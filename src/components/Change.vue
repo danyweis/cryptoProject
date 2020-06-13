@@ -1,6 +1,7 @@
 <template>
-  <div class>
-    <table class="changes">
+  <!-- CHANGE OF THE COIN -->
+  <div class="tableFlow">
+    <table>
       <caption>Change info</caption>
       <thead>
         <tr>
@@ -15,34 +16,48 @@
       </thead>
       <tbody>
         <tr>
-          <th
-            :style="percentageColor(coinUrl.market_data.price_change_percentage_24h)"
-            v-html="showPercentage(coinUrl.market_data.price_change_percentage_24h)"
-          ></th>
-          <th
-            :style="percentageColor(coinUrl.market_data.price_change_percentage_7d)"
-            v-html="showPercentage(coinUrl.market_data.price_change_percentage_7d)"
-          ></th>
-          <th
-            :style="percentageColor(coinUrl.market_data.price_change_percentage_14d)"
-            v-html="showPercentage(coinUrl.market_data.price_change_percentage_14d)"
-          ></th>
-          <th
-            :style="percentageColor(coinUrl.market_data.price_change_percentage_30d)"
-            v-html="showPercentage(coinUrl.market_data.price_change_percentage_30d)"
-          ></th>
-          <th
-            :style="percentageColor(coinUrl.market_data.price_change_percentage_60d)"
-            v-html="showPercentage(coinUrl.market_data.price_change_percentage_60d)"
-          ></th>
-          <th
-            :style="percentageColor(coinUrl.market_data.price_change_percentage_200d)"
-            v-html="showPercentage(coinUrl.market_data.price_change_percentage_200d)"
-          ></th>
-          <th
-            :style="percentageColor(coinUrl.market_data.price_change_percentage_1y)"
-            v-html="showPercentage(coinUrl.market_data.price_change_percentage_1y)"
-          ></th>
+          <th>
+            <nobr
+              :style="percentageColor(coinUrl.market_data.price_change_percentage_24h)"
+              v-html="showPercentage(coinUrl.market_data.price_change_percentage_24h)"
+            ></nobr>
+          </th>
+          <th>
+            <nobr
+              :style="percentageColor(coinUrl.market_data.price_change_percentage_7d)"
+              v-html="showPercentage(coinUrl.market_data.price_change_percentage_7d)"
+            ></nobr>
+          </th>
+          <th>
+            <nobr
+              :style="percentageColor(coinUrl.market_data.price_change_percentage_14d)"
+              v-html="showPercentage(coinUrl.market_data.price_change_percentage_14d)"
+            ></nobr>
+          </th>
+          <th>
+            <nobr
+              :style="percentageColor(coinUrl.market_data.price_change_percentage_30d)"
+              v-html="showPercentage(coinUrl.market_data.price_change_percentage_30d)"
+            ></nobr>
+          </th>
+          <th>
+            <nobr
+              :style="percentageColor(coinUrl.market_data.price_change_percentage_60d)"
+              v-html="showPercentage(coinUrl.market_data.price_change_percentage_60d)"
+            ></nobr>
+          </th>
+          <th>
+            <nobr
+              :style="percentageColor(coinUrl.market_data.price_change_percentage_200d)"
+              v-html="showPercentage(coinUrl.market_data.price_change_percentage_200d)"
+            ></nobr>
+          </th>
+          <th>
+            <nobr
+              :style="percentageColor(coinUrl.market_data.price_change_percentage_1y)"
+              v-html="showPercentage(coinUrl.market_data.price_change_percentage_1y)"
+            ></nobr>
+          </th>
         </tr>
       </tbody>
     </table>

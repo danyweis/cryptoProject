@@ -1,7 +1,9 @@
 <template>
+  <!-- activity on social media and on the web -->
   <div>
     <h2 class="positionCenter presenceWeb">Presence on the web</h2>
     <div class="activity">
+      <!-- GITHUB -->
       <div class="activityInfoBox github" v-if="coinUrl.links.repos_url.github.length > 0">
         <h3>Github</h3>
         <div v-for="(repo, index) in coinUrl.links.repos_url.github" :key="index" class="git">
@@ -9,12 +11,14 @@
           <a target="_blank" :href="repo">{{' ' + repo.slice(repo.lastIndexOf('/'),-1) }}</a>
         </div>
       </div>
+      <!-- END ACTIVITYINFOBOX -->
+      <!-- SOCIAL MEDIA -->
       <div class="social">
         <h3>Social media</h3>
+        <!-- TWITTER -->
         <div class="activityInfoBox" v-if="coinUrl.links.twitter_screen_name">
           <div class="twitter">
             <i class="fab fa-twitter"></i>
-            <!-- :href="twitter + coinUrl.links.twitter_screen_name" -->
             <a
               target="_blank"
               :href="twitter + coinUrl.links.twitter_screen_name"
@@ -22,6 +26,8 @@
             <p>{{ coinUrl.community_data.twitter_followers + " followers" }}</p>
           </div>
         </div>
+        <!-- END ACTIVITYINFOBOX -->
+        <!-- SUBREDDIT -->
         <div class="activityInfoBox" v-if="subreddit">
           <div class="subreddit">
             <i class="fab fa-reddit-alien"></i>
@@ -29,6 +35,8 @@
             <p>{{ coinUrl.community_data.reddit_subscribers + " subscribers" }}</p>
           </div>
         </div>
+        <!-- END ACTIVITYINFOBOX -->
+        <!-- FACEBOOK -->
         <div class="activityInfoBox" v-if="coinUrl.links.facebook_username">
           <div class="facebook">
             <i class="fab fa-facebook-f"></i>
@@ -38,8 +46,10 @@
             >{{ ' ' + coinUrl.links.facebook_username}}</a>
           </div>
         </div>
+        <!-- END ACTIVITYINFOBOX -->
       </div>
-
+      <!-- END SOCIAL -->
+      <!-- OTHER PRESENCE ON THE WEB -->
       <div class="otherWeb">
         <div
           class="activityInfoBox"
@@ -53,6 +63,7 @@
             </div>
           </div>
         </div>
+        <!-- END ACTIVITYINFOBOX -->
         <div
           class="activityInfoBox"
           v-if="coinUrl.links.official_forum_url.length > 0 && coinUrl.links.official_forum_url[0].length > 0"
@@ -69,7 +80,16 @@
             </div>
           </div>
         </div>
+        <!-- END ACTIVITYINFOBOX -->
       </div>
+      <!-- END OTHER WEB -->
+    </div>
+    <!-- END ACTIVITY -->
+    <!-- THE BAR ON THE BOTTOM TO SEE THE SENTIMENT -->
+    <p>{{"Sentiment : " + coinUrl.sentiment_votes_up_percentage + "% / " + coinUrl.sentiment_votes_down_percentage + "%"}}</p>
+    <div class="sentiment">
+      <div :style="{'width': coinUrl.sentiment_votes_up_percentage + '%'}" class="positiv"></div>
+      <div class="negativ"></div>
     </div>
   </div>
 </template>
@@ -100,6 +120,19 @@ export default {
 .otherWeb {
   margin: 10px 20px;
 }
+
+.sentiment {
+  width: 95%;
+  margin: 2.5%;
+  height: 2px;
+  background: red;
+}
+.positiv {
+  background: green;
+  height: 100%;
+  width: 50%;
+}
+
 .presenceWeb {
   margin: 20px;
 }

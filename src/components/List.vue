@@ -1,43 +1,69 @@
 <template>
+  <!-- Part of the full list of the coins in a table -->
   <div class="tableBox">
-    <table>
-      <thead v-if="updateDetail">
-        <tr>
-          <th>Rank</th>
-          <th colspan="3">Name</th>
-          <th>Price</th>
-          <th>1h</th>
-          <th>24h</th>
-          <th>24vol</th>
-          <th>MCap</th>
-        </tr>
-      </thead>
-      <tbody v-for="(coin, index) in coins" :key="coin.market_cap_rank">
-        <tr :style="[!updateDetail? {'font-size': '2em'}:{}]">
-          <!-- <td>{{ '# ' + coin.market_cap_rank }}</td> -->
-          <td>{{ '# ' + (index + 1) }}</td>
-          <td @click="whatCoin(coin.id)" class="clickSymbol">{{ coin.symbol.toUpperCase() }}</td>
-          <td v-if="updateDetail">
-            <img class="coinIcon" :src="coin.image" alt="coin icon" />
-          </td>
-          <td @click="whatCoin(coin.id)" class="clickSymbol" v-if="updateDetail">{{coin.name}}</td>
-          <td>{{'$ ' + coin.current_price}}</td>
-          <td
-            :style="percentageColor(coin.price_change_percentage_1h_in_currency)"
-            v-html="showPercentage(coin.price_change_percentage_1h_in_currency)"
-          ></td>
-          <td
-            v-if="updateDetail"
-            :style="percentageColor(coin.price_change_percentage_24h)"
-            v-html="showPercentage(coin.price_change_percentage_24h)"
-          ></td>
-          <td v-if="updateDetail">{{ '$ ' + coin.total_volume.toLocaleString() }}</td>
-          <td v-if="updateDetail">{{ '$ ' + coin.market_cap.toLocaleString()}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <coin-info v-if="!coinUrl == ''" :coinUrl="coinUrl" v-on:urlEmpty="coinInfo"></coin-info>
-    <!-- <coin-info v-if="!coinUrl == ''" :coinUrl="coinUrl" v-on:urlEmpty="coinUrl = ''"></coin-info> -->
+    <div class="tableFlow">
+      <table>
+        <!-- updateDetail is if the switch min/max is swiched -->
+        <thead v-if="updateDetail">
+          <tr>
+            <th>Rank</th>
+            <th colspan="3">Name</th>
+            <th>Price</th>
+            <th>1h</th>
+            <th>24h</th>
+            <th>24vol</th>
+            <th>MCap</th>
+          </tr>
+        </thead>
+        <!-- FOR LOOP  -->
+        <tbody v-for="(coin, index) in coins" :key="coin.market_cap_rank">
+          <!-- updateDetail switch on min font size  2em -->
+          <tr :style="[!updateDetail? {'font-size': '2em'}:{}]">
+            <td>
+              <nobr>{{ '# ' + (index + 1) }}</nobr>
+            </td>
+            <!-- @CLICK WE OPEN THE PAGE WITH THE INFO OF THE PARTICULAR INFO -->
+            <td @click="whatCoin(coin.id)" class="clickSymbol">{{ coin.symbol.toUpperCase() }}</td>
+            <!-- COIN ICON SHOWN IF ON MAX-->
+            <td v-if="updateDetail">
+              <img class="coinIcon" :src="coin.image" alt="coin icon" />
+            </td>
+            <!-- @CLICK WE OPEN THE PAGE WITH THE INFO OF THE PARTICULAR INFO -->
+            <td @click="whatCoin(coin.id)" class="clickSymbol" v-if="updateDetail">
+              <nobr>{{coin.name}}</nobr>
+            </td>
+            <!-- PRICE -->
+            <td>
+              <nobr>{{'$' + coin.current_price}}</nobr>
+            </td>
+            <!-- CHANGE 1H -->
+            <td>
+              <nobr
+                :style="percentageColor(coin.price_change_percentage_1h_in_currency)"
+                v-html="showPercentage(coin.price_change_percentage_1h_in_currency)"
+              ></nobr>
+            </td>
+            <!-- CHANGE 24H SHOWN IF ON MAX-->
+            <td v-if="updateDetail">
+              <nobr
+                :style="percentageColor(coin.price_change_percentage_24h)"
+                v-html="showPercentage(coin.price_change_percentage_24h)"
+              ></nobr>
+            </td>
+            <!-- VOLUME SHOWN IF ON MAX-->
+            <td v-if="updateDetail">
+              <nobr>{{ '$ ' + coin.total_volume.toLocaleString() }}</nobr>
+            </td>
+            <!-- MARKET CAP SHOWN IF ON MAX-->
+            <td v-if="updateDetail">
+              <nobr>{{ '$ ' + coin.market_cap.toLocaleString()}}</nobr>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- OPEN THE PAGE ABOUT THE INFO OF THE COIN -->
+      <coin-info v-if="!coinUrl == ''" :coinUrl="coinUrl" v-on:urlEmpty="coinInfo"></coin-info>
+    </div>
   </div>
 </template>
 
@@ -94,15 +120,16 @@ export default {
   filter: drop-shadow(1px 1px 1px #d3ebff);
 }
 .tableBox {
-  display: flex;
-  justify-content: center;
+  min-width: 90%;
 }
 table {
   border-collapse: collapse;
-  min-width: 80%;
+  width: 90%;
+  margin-left: 5%;
 }
+th,
 td {
-  padding: 5px;
+  padding: 10px;
   border-bottom: #f0f8ff30 solid 1px;
 }
 .clickSymbol:hover {

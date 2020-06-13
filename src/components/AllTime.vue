@@ -1,25 +1,49 @@
 <template>
-  <div class>
+  <div class="tableFlow">
     <table class="allTimeInfo">
       <caption>All-time info</caption>
       <thead>
         <tr>
-          <th>All-time high *</th>
-          <th>All-time high in %</th>
-          <th>All-time high date</th>
-          <th>All-time low *</th>
-          <th>All-time low in %</th>
-          <th>All-time low date</th>
+          <th>
+            <nobr>All-time high</nobr>
+          </th>
+          <th>
+            <nobr>All-time high in %</nobr>
+          </th>
+          <th>
+            <nobr>All-time high date</nobr>
+          </th>
+          <th>
+            <nobr>All-time low</nobr>
+          </th>
+          <th>
+            <nobr>All-time low in %</nobr>
+          </th>
+          <th>
+            <nobr>All-time low date</nobr>
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th>{{ '$ ' + coinUrl.market_data.ath.usd }}</th>
-          <th>{{ Math.round(coinUrl.market_data.ath_change_percentage.usd * 100) / 100 + '%' }}</th>
-          <th>{{ coinUrl.market_data.ath_date.usd.slice(0,10) }}</th>
-          <th>{{ '$ ' + coinUrl.market_data.atl.usd }}</th>
-          <th>{{ Math.round(coinUrl.market_data.atl_change_percentage.usd * 100) / 100 + '%' }}</th>
-          <th>{{ coinUrl.market_data.atl_date.usd.slice(0,10) }}</th>
+          <th>
+            <nobr>{{ '$ ' + coinUrl.market_data.ath.usd }}</nobr>
+          </th>
+          <th>
+            <nobr>{{ Math.round(coinUrl.market_data.ath_change_percentage.usd * 100) / 100 + '%' }}</nobr>
+          </th>
+          <th>
+            <nobr>{{ coinUrl.market_data.ath_date.usd.slice(0,10) }}</nobr>
+          </th>
+          <th>
+            <nobr>{{ '$ ' + coinUrl.market_data.atl.usd }}</nobr>
+          </th>
+          <th>
+            <nobr>{{ Math.round(coinUrl.market_data.atl_change_percentage.usd * 100) / 100 + '%' }}</nobr>
+          </th>
+          <th>
+            <nobr>{{ coinUrl.market_data.atl_date.usd.slice(0,10) }}</nobr>
+          </th>
         </tr>
       </tbody>
     </table>

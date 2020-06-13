@@ -23,7 +23,9 @@
                 }}
               </div>
               <div v-if="coinUrl.name == 'Bitcoin'">
-                <is-bitcoin></is-bitcoin>
+                <a class="hashInfoLink" @click="seeHash">Hash Info</a>
+                <i class="arrow fas fa-sort-down"></i>
+                <is-bitcoin v-if="hashButton"></is-bitcoin>
               </div>
             </div>
           </div>
@@ -31,6 +33,18 @@
         <div class="rightInfo">
           <div class="priceBlockCoinInfo">
             <div class="price">{{ '$ ' + coinUrl.market_data.current_price.usd}}</div>
+            <div class="supply">
+              <p>
+                <span
+                  v-if="coinUrl.market_data.circulating_supply"
+                >{{ 'Circulating supply : ' +coinUrl.market_data.circulating_supply.toLocaleString() }}</span>
+                <br />
+
+                <span
+                  v-if="coinUrl.market_data.total_supply"
+                >{{ 'Total supply : ' + coinUrl.market_data.total_supply.toLocaleString() }}</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -62,12 +76,14 @@
       <hr />
       <changes-info :coinUrl="coinUrl"></changes-info>
       <hr />
+
       <activety-info :coinUrl="coinUrl"></activety-info>
       <hr />
       <dev-data-info :coinUrl="coinUrl"></dev-data-info>
       <hr />
-      <button class="exchange">Exchange Info</button>
+      <a class="exchange" @click="loadExchange">Exchange Info</a>
       <i class="arrow fas fa-sort-down"></i>
+      <exchange-info v-if="buttonClicked" :coinUrl="coinUrl"></exchange-info>
     </div>
   </div>
 </template>
@@ -78,13 +94,15 @@ import Changes from "./Change.vue";
 import Activety from "./Activety.vue";
 import DevData from "./GithubInfo.vue";
 import IsBitcoin from "./IsBitcoin.vue";
+import ExchangeInfo from "./Exchange.vue";
 import percentageMixin from "../mixins/precentageMixins.js";
 
 export default {
   props: ["coinUrl"],
   data: function() {
     return {
-      // bitcoin: "Bitcoin"
+      buttonClicked: false,
+      hashButton: false
     };
   },
   components: {
@@ -92,18 +110,33 @@ export default {
     changesInfo: Changes,
     activetyInfo: Activety,
     devDataInfo: DevData,
-    isBitcoin: IsBitcoin
+    isBitcoin: IsBitcoin,
+    ExchangeInfo: ExchangeInfo
   },
   methods: {
     getCoinData: function() {
       fetch(coinUrl)
         .then(resp => reso.json())
         .then(data => console.log(data));
-    }
-  },
-  isBitcoin: function() {
-    if (coinUrl.name == "Bitcoin") {
-      return true;
+    },
+    isBitcoin: function() {
+      if (coinUrl.name == "Bitcoin") {
+        return true;
+      }
+    },
+    loadExchange: function() {
+      if (this.buttonClicked) {
+        this.buttonClicked = false;
+      } else {
+        this.buttonClicked = true;
+      }
+    },
+    seeHash: function() {
+      if (this.hashButton) {
+        this.hashButton = false;
+      } else {
+        this.hashButton = true;
+      }
     }
   },
   mixins: [percentageMixin]
@@ -116,16 +149,13 @@ export default {
   height: 100vh;
   width: 100%;
   top: 0;
-  background-color: #00000070;
+  background-color: #ffffff70;
   /* color: black; */
 }
 .informationBox {
-  height: 95%;
-  width: 95%;
-  background-image: linear-gradient(45deg, #032d5e, #001d93, #032d5e);
-
-  margin: 2.5%;
-  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(45deg, #032d5efb, #001d93ff, #032d5efb);
   position: relative;
   padding: 15px;
   overflow: auto;
@@ -135,7 +165,7 @@ export default {
   top: 5px;
   right: 5px;
   line-height: 100%;
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
 }
 .topRow {
@@ -152,7 +182,7 @@ export default {
 }
 .leftInfo {
   display: flex;
-  align-items: baseline;
+  align-items: center;
 }
 .rightInfo {
   margin-right: 20px;
@@ -176,13 +206,18 @@ export default {
   margin: 25px 5px;
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .priceBlockCoinInfo {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: center;
 }
-
+.supply {
+  text-align: end;
+}
 .price {
   font-size: 2em;
 }
@@ -205,7 +240,8 @@ th {
   color: #d3ebff;
   outline: 0;
 }
-.exchange:hover {
+.exchange:hover,
+.hashInfoLink:hover {
   color: #fff;
   text-decoration: underline;
 }
