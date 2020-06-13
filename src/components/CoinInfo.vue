@@ -22,6 +22,9 @@
                 ' Block time: ' + coinUrl.block_time_in_minutes + ' min'
                 }}
               </div>
+              <div v-if="coinUrl.name == 'Bitcoin'">
+                <is-bitcoin></is-bitcoin>
+              </div>
             </div>
           </div>
         </div>
@@ -74,24 +77,33 @@ import AllTime from "./AllTime.vue";
 import Changes from "./Change.vue";
 import Activety from "./Activety.vue";
 import DevData from "./GithubInfo.vue";
+import IsBitcoin from "./IsBitcoin.vue";
 import percentageMixin from "../mixins/precentageMixins.js";
 
 export default {
   props: ["coinUrl"],
   data: function() {
-    return {};
+    return {
+      // bitcoin: "Bitcoin"
+    };
   },
   components: {
     allTime: AllTime,
     changesInfo: Changes,
     activetyInfo: Activety,
-    devDataInfo: DevData
+    devDataInfo: DevData,
+    isBitcoin: IsBitcoin
   },
   methods: {
     getCoinData: function() {
       fetch(coinUrl)
         .then(resp => reso.json())
         .then(data => console.log(data));
+    }
+  },
+  isBitcoin: function() {
+    if (coinUrl.name == "Bitcoin") {
+      return true;
     }
   },
   mixins: [percentageMixin]
