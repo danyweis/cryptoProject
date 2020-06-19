@@ -14,7 +14,7 @@ This is the same time the project I tried to build with [Vue.js](https://github.
 
 ![Screenshot minimal Information](screenshots/minInfo.jpg)
 
-### Information lit most Crypto Price Trackers
+### Information like most Crypto Price Trackers
 
 ![Screenshot maximal Information](screenshots/maxInfo.jpg)
 
